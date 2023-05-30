@@ -75,4 +75,4 @@ def update_state(state_id):
         if k not in ['id', 'created_at', 'updated_at']:
             state.__dict__[k] = payload[k]
     state.save()
-    return jsonify(state.to_dict())
+    return jsonify(state.to_dict()), 200
