@@ -21,6 +21,7 @@ def refresh_storage(self):
     to a possibly updated database"""
     storage.close()
 
+
 @app.errorhandler(404)
 def not_found(error):
     """handler for 404 errors that returns
