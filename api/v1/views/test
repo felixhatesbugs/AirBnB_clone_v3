@@ -1,0 +1,1 @@
+curl -X PUT http://0.0.0.0:5000/api/v1/states/af316471-d2ee-478f-a4a5-781c7b49829e -H "Content-Type: application/json" -d '{"name": "California is so cool", "creator": "Felix", "id": "3we"}'
