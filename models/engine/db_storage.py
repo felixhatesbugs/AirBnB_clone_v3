@@ -76,7 +76,7 @@ class DBStorage:
         self.__session.remove()
 
     def get(self, cls, id):
-        """Returns the object based on the 
+        """Returns the object based on the
         class and its ID, or None if not found"""
         storage = self.all(cls)
         for obj in storage.values():
