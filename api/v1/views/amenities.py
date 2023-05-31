@@ -32,7 +32,7 @@ def amenity_by_id(amenity_id):
         '/amenities/<amenity_id>',
         methods=['DELETE'],
         strict_slashes=False)
-def del_amenity(amenity):
+def del_amenity(amenity_id):
     """deletes specified amenity instance
     """
     amenity = storage.get('Amenity', amenity_id)
