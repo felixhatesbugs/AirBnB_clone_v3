@@ -77,6 +77,8 @@ def update_user(user_id):
     # for k in payload:
     #     if k not in ['id', 'created_at', 'updated_at']:
     #         user.__dict__[k] = payload[k]
-    user.name = payload['name']
+    user.first_name = payload['first_name']
+    user.last_name = payload['last_name']
+    user.password = payload['password']
     user.save()
     return jsonify(user.to_dict()), 200
