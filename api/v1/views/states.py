@@ -28,9 +28,10 @@ def state_by_id(state_id):
     return jsonify(state.to_dict())
 
 
-@app_views.route('/states/<state_id>',
-                 methods=['DELETE'],
-                 strict_slashes=False)
+@app_views.route(
+        '/states/<state_id>',
+        methods=['DELETE'],
+        strict_slashes=False)
 def del_state(state_id):
     """deletes specified state instance
     """
@@ -63,16 +64,17 @@ def update_state(state_id):
     except the id , created_at and
     updated_at keys
     """
-    state = storage.get('State', state_id)
-
-    if state is None:
-        abort(404)
     if not request.get_json():
         return jsonify({'error': 'Not a JSON'}), 400
 
+    state = storage.get('State', state_id)
+    if state is None:
+        abort(404)
+
     payload = request.get_json()
-    for k in payload:
-        if k not in ['id', 'created_at', 'updated_at']:
-            state.__dict__[k] = payload[k]
+    # for k in payload:
+    #     if k not in ['id', 'created_at', 'updated_at']:
+    #         state.__dict__[k] = payload[k]
+    state.name = payload['name']
     state.save()
     return jsonify(state.to_dict()), 200
