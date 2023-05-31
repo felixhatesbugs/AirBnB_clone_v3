@@ -61,7 +61,7 @@ def create_place(city_id):
     else:
         payload = request.get_json()
 
-        city = storage.get('City', state_id)
+        city = storage.get('City', city_id)
         user = storage.get('User', payload['user_id'])
 
         if user is None or city is None:
