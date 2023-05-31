@@ -19,7 +19,7 @@ def all_place(city_id):
     if city is None:
         abort(404)
     dict_places = [v.to_dict() for v in city.places]
-    return jsonify(dict_cities)
+    return jsonify(dict_places)
 
 
 @app_views.route('/places/<place_id>', methods=['GET'],
@@ -62,10 +62,9 @@ def create_place(city_id):
         payload = request.get_json()
 
         city = storage.get('City', state_id)
-        if city is None:
-            abort(404)
         user = storage.get('User', payload['user_id'])
-        if user is None:
+
+        if user is None or city is None:
             abort(404)
 
         payload['city_id'] = city.id
