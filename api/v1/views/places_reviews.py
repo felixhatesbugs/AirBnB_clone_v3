@@ -10,7 +10,7 @@ from models.place import Place
 from models.review import Review
 
 
-@app_views.route('/reviews/<place_id>/reviews', methods=['GET'],
+@app_views.route('/places/<place_id>/reviews', methods=['GET'],
                  strict_slashes=False)
 def all_reviews(place_id):
     """returns all review objects of a place in json
@@ -19,7 +19,7 @@ def all_reviews(place_id):
     if place is None:
         abort(404)
     dict_reviews = [v.to_dict() for v in place.reviews]
-    return jsonify(dict_reviews)
+    return jsonify(dict_reviews), 200
 
 
 @app_views.route('/reviews/<review_id>', methods=['GET'],
@@ -31,7 +31,7 @@ def review_by_id(review_id):
     review = storage.get('Review', review_id)
     if review is None:
         abort(404)
-    return jsonify(review.to_dict())
+    return jsonify(review.to_dict()), 200
 
 
 @app_views.route('/reviews/<review_id>', methods=['DELETE'],
