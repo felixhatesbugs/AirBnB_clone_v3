@@ -15,6 +15,8 @@ def all_cities(state_id):
     """returns all city objects of a state in json
     """
     state = storage.get('State', state_id)
+    if state is None:
+        abort(404)
     dict_cities = [v.to_dict() for v in state.cities]
     return jsonify(dict_cities)
 
@@ -44,7 +46,8 @@ def del_city(city_id):
     return jsonify({}), 200
 
 
-@app_views.route('/states/state_id/cities', methods=['POST'], strict_slashes=False)
+@app_views.route('/states/<state_id>/cities', methods=['POST'],
+                 strict_slashes=False)
 def create_city(state_id):
     """creates new state instance
     """
@@ -81,5 +84,5 @@ def update_city(city_id):
     #     if k not in ['id', 'created_at', 'updated_at']:
     #         state.__dict__[k] = payload[k]
     city.name = payload['name']
-    state.save()
-    return jsonify(state.to_dict()), 200
+    city.save()
+    return jsonify(city.to_dict()), 200
