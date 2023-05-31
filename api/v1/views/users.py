@@ -77,7 +77,7 @@ def update_user(user_id):
 
     payload = request.get_json()
     for k in payload:
-        if not in ['id', 'email', 'created_at', 'updated_at']:
+        if k not in ['id', 'email', 'created_at', 'updated_at']:
             setattr(user, k, payload[k])
     user.save()
     return jsonify(user.to_dict()), 200
