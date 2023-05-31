@@ -50,8 +50,10 @@ def create_user():
     """
     if not request.get_json():
         return jsonify({'error': 'Not a JSON'}), 400
-    elif 'name' not in request.get_json():
-        return jsonify({'error': 'Missing name'}), 400
+    elif 'email' not in request.get_json():
+        return jsonify({'error': 'Missing email'}), 400
+    elif 'password' not in request.get_json():
+        return jsonify({'error': 'Missing password'}), 400
     else:
         payload = request.get_json()
         user = User(**payload)
