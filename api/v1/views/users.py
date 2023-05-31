@@ -76,11 +76,8 @@ def update_user(user_id):
         abort(404)
 
     payload = request.get_json()
-    # for k in payload:
-    #     if k not in ['id', 'created_at', 'updated_at']:
-    #         user.__dict__[k] = payload[k]
-    user.first_name = payload['first_name']
-    user.last_name = payload['last_name']
-    user.password = payload['password']
+    for k in payload:
+        if not in ['id', 'email', 'created_at', 'updated_at']:
+            setattr(user, k, payload[k])
     user.save()
     return jsonify(user.to_dict()), 200
